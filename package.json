@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node serve.js",
     "build": "rm -rf dist && NODE_ENV=production webpack --config webpack.config.js",
-    "ghpages": "gh-pages -d dist",
+    "ghpages": "npm run build && gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
