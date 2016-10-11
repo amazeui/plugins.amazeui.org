@@ -17,7 +17,7 @@ export default class PluginList extends Component {
   render() {
     const isThird = this.props.isThird;
 
-      return (
+    return (
       <ul className="am-avg-sm-1 am-avg-md-2 plugin-list">
         {
           this.props.plugins.map((plugin, i) => {
@@ -30,9 +30,6 @@ export default class PluginList extends Component {
               modified,
               version,
             } = plugin;
-
-            console.log('homepage:', homepage[0]);
-            console.log('repository:', repository[0].replace('git+', ''));
             let pluginLi = () => (
               <li key={i}>
                 <div className="pl-item">
@@ -45,26 +42,23 @@ export default class PluginList extends Component {
                   </p>
                   <p className="plugin-desc">{description[0]}</p>
                   <p className="plugin-links">
-                    <a href={homepage[0]} target="_blank">
+                    <a href={homepage[0].replace(/hub.io/, '.github.io')} target="_blank">
                       <span className="am-icon-book" />
                       项目主页</a> |{' '}
                     <a href={repository[0].replace('git+', '')} target="_blank">
                       <span className="am-icon-github" />
                       源码仓库
                     </a>
-                    <span> {author[0]} </span>
                   </p>
                 </div>
               </li>
             );
-
             if(!isThird && author[0] == "minwe") {
               return pluginLi();
             }
             if(isThird && author[0] !== "minwe") {
               return pluginLi();
             }
-
           })
         }
       </ul>
