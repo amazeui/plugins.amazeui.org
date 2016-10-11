@@ -5,7 +5,8 @@ import React, {
 
 export default class PluginList extends Component {
   static propTypes = {
-    plugins: PropTypes.array.isRequired
+    plugins: PropTypes.array.isRequired,
+    isThird: PropTypes.bool.isRequired
   };
 
   formatDate(date) {
@@ -14,7 +15,9 @@ export default class PluginList extends Component {
   }
 
   render() {
-    return (
+    const isThird = this.props.isThird;
+
+      return (
       <ul className="am-avg-sm-1 am-avg-md-2 plugin-list">
         {
           this.props.plugins.map((plugin, i) => {
@@ -27,7 +30,10 @@ export default class PluginList extends Component {
               modified,
               version,
             } = plugin;
-            return (
+
+            console.log('homepage:', homepage[0]);
+            console.log('repository:', repository[0].replace('git+', ''));
+            let pluginLi = () => (
               <li key={i}>
                 <div className="pl-item">
                   <h3>{name[0]}</h3>
@@ -46,10 +52,19 @@ export default class PluginList extends Component {
                       <span className="am-icon-github" />
                       源码仓库
                     </a>
+                    <span> {author[0]} </span>
                   </p>
                 </div>
               </li>
             );
+
+            if(!isThird && author[0] == "minwe") {
+              return pluginLi();
+            }
+            if(isThird && author[0] !== "minwe") {
+              return pluginLi();
+            }
+
           })
         }
       </ul>
